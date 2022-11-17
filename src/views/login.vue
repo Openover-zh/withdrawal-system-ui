@@ -5,6 +5,7 @@
       <el-form-item prop="username" key="username" v-if="isAdmin">
         <el-input
           v-model="loginForm.username"
+          disabled
           type="text"
           auto-complete="off"
           placeholder="账号"
@@ -90,7 +91,7 @@ export default {
     return {
       codeUrl: "",
       loginForm: {
-        username: "",
+        username: "admin",
         password: "",
         rememberMe: false,
         code: "",
@@ -99,6 +100,14 @@ export default {
         type: 1 //管理员为1 普通用户为2
       },
       loginRules: {
+        cardNumber: [
+          { required: true, message: "请输入卡号", trigger: "blur" },
+          {
+            pattern: /^\d{9}$/,
+            message: "卡号必须为9为数字！",
+            trigger: "blur"
+          }
+        ],
         username: [
           { required: true, trigger: "blur", message: "请输入您的账号" }
         ],
